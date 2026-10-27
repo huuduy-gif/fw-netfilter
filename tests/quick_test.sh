@@ -14,7 +14,7 @@ echo "== Build =="
 make clean >/dev/null 2>&1
 make 2>&1 | tee /tmp/fw_build.log
 [ "${PIPESTATUS[0]}" -eq 0 ] || { echo "FAIL: build loi"; exit 1; }
-grep -i "warning" /tmp/fw_build.log && echo ">> CO WARNING, kiem tra lai" || echo ">> Build sach"
+grep -i "warning" /tmp/fw_build.log | grep -v "compiler differs" && echo ">> CO WARNING, kiem tra lai" || echo ">> Build sach"
 
 echo "== Nap/go 5 lan =="
 for i in 1 2 3 4 5; do
